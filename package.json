@@ -1,0 +1,30 @@
+{
+  "name": "@f0c1s/transform-color",
+  "version": "1.0.0",
+  "description": "Transform color values among rgb, hsl, hsv, hex etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IAmAnubhavSaini/node-transform-color.git"
+  },
+  "keywords": [
+    "color",
+    "transform",
+    "color-transform",
+    "transform-color",
+    "rgb2hex",
+    "hex2rgb"
+  ],
+  "author": "\"Anubhav <iamanubhavsaini@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IAmAnubhavSaini/node-transform-color/issues"
+  },
+  "homepage": "https://github.com/IAmAnubhavSaini/node-transform-color#readme",
+  "devDependencies": {
+    "jasmine": "^3.6.4"
+  }
+}
