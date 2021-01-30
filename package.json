@@ -1,10 +1,11 @@
 {
   "name": "@f0c1s/transform-color",
-  "version": "2021.1.1",
+  "version": "2021.1.2",
   "description": "Transform color values among rgb, hsl, hsv, hex etc",
   "main": "src/color.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "npm run build && jasmine",
+    "build": "node_modules/.bin/tsc src/*.ts"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
   },
   "homepage": "https://github.com/IAmAnubhavSaini/node-transform-color#readme",
   "devDependencies": {
+    "@types/jasmine": "^3.6.3",
     "@types/node": "^14.14.22",
-    "jasmine": "^3.6.4"
+    "jasmine": "^3.6.4",
+    "typescript": "^4.1.3"
   }
 }
