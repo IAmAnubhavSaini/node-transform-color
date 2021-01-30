@@ -17,14 +17,16 @@ declare enum BasicColors {
     Yellow = "#FFFF00"
 }
 declare class Color {
+    private static get hexDefault();
     static rgb2hex(r: string, g: string, b: string): string;
     static hex2rgb(hex: string): {
-        r: number | undefined;
-        g: number | undefined;
-        b: number | undefined;
+        r: number;
+        g: number;
+        b: number;
         rgb: string;
         rgba: string;
-    } | undefined;
+    };
+    private static get rgbDefault();
 }
 export { Color, BasicColors };
 //# sourceMappingURL=color.d.ts.map

@@ -18,6 +18,10 @@ enum BasicColors {
 }
 
 class Color {
+    private static get hexDefault() {
+        return '#000';
+    }
+
     static rgb2hex(r: string, g: string, b: string) {
         return [r, g, b]
             .map(c => parseInt(c))
@@ -29,19 +33,31 @@ class Color {
     }
 
     static hex2rgb(hex: string) {
-        return [hex || '#000']
+        return [hex || Color.hexDefault]
             .map(h => h.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_matches, r, g, b) => '' + r + r + g + g + b + b))
             .map(h => /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h))
-            .map(mrgb => (mrgb || [0, 0, 0, 0]).slice(1))
-            .map((rgb: (string | number)[]) => rgb.map(c => parseInt(c.toString(), 16)))
-            .map(rgb => ({
-                r: rgb[0],
-                g: rgb[1],
-                b: rgb[2],
+            .map(mrgb => (mrgb || ['0', '0', '0', '0']).slice(1))
+            .map((rgb: string[]) => rgb.map(c => parseInt(c.toString(), 16)))
+            .map((rgb: number[]) => rgb.map(c => c >= 0 && c <= 255 ? c : 0))
+            .map((rgb: number[]) => ({
+                r: rgb[0] || 0,
+                g: rgb[1] || 0,
+                b: rgb[2] || 0,
                 rgb: `rgb(${rgb.join(', ')})`,
                 rgba: `rgba(${rgb.join(', ')}, 1)`
             }))
-            .pop();
+            .pop() || Color.rgbDefault;
+    }
+
+    private static get rgbDefault() {
+        const rgb: [number, number, number] = [0, 0, 0];
+        return {
+            r: rgb[0],
+            g: rgb[1],
+            b: rgb[2],
+            rgb: `rgb(${rgb.join(', ')})`,
+            rgba: `rgba(${rgb.join(', ')}, 1)`
+        };
     }
 }
 

@@ -22,6 +22,9 @@ var BasicColors;
 })(BasicColors || (BasicColors = {}));
 exports.BasicColors = BasicColors;
 class Color {
+    static get hexDefault() {
+        return '#000';
+    }
     static rgb2hex(r, g, b) {
         return [r, g, b]
             .map(c => parseInt(c))
@@ -32,19 +35,30 @@ class Color {
             .reduce((a, c) => a + c, '#');
     }
     static hex2rgb(hex) {
-        return [hex || '#000']
+        return [hex || Color.hexDefault]
             .map(h => h.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_matches, r, g, b) => '' + r + r + g + g + b + b))
             .map(h => /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h))
-            .map(mrgb => (mrgb || [0, 0, 0, 0]).slice(1))
+            .map(mrgb => (mrgb || ['0', '0', '0', '0']).slice(1))
             .map((rgb) => rgb.map(c => parseInt(c.toString(), 16)))
-            .map(rgb => ({
+            .map((rgb) => rgb.map(c => c >= 0 && c <= 255 ? c : 0))
+            .map((rgb) => ({
+            r: rgb[0] || 0,
+            g: rgb[1] || 0,
+            b: rgb[2] || 0,
+            rgb: `rgb(${rgb.join(', ')})`,
+            rgba: `rgba(${rgb.join(', ')}, 1)`
+        }))
+            .pop() || Color.rgbDefault;
+    }
+    static get rgbDefault() {
+        const rgb = [0, 0, 0];
+        return {
             r: rgb[0],
             g: rgb[1],
             b: rgb[2],
             rgb: `rgb(${rgb.join(', ')})`,
             rgba: `rgba(${rgb.join(', ')}, 1)`
-        }))
-            .pop();
+        };
     }
 }
 exports.Color = Color;
