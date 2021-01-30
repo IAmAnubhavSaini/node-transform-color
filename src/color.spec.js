@@ -1,4 +1,4 @@
-var _a = require('./color'), Color = _a.Color, BasicColors = _a.BasicColors;
+var Color = require('./color').Color;
 describe('Color', function () {
     describe('has', function () {
         it('rgb2hex as a function', function () {
